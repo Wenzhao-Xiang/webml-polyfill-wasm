@@ -27,7 +27,7 @@ namespace nn {
 // The implementations in tflite/kernels/internal/ take a Dims<4> object
 // even if the original tensors were not 4D.
 inline tflite::Dims<4> convertShapeToDims(const Shape& shape) {
-  nnAssert(shape.dimensions.size() <= 4);
+  // nnAssert(shape.dimensions.size() <= 4);
   tflite::Dims<4> dims;
 
   // The dimensions are reversed in Dims<4>.
@@ -48,7 +48,7 @@ inline tflite::Dims<4> convertShapeToDims(const Shape& shape) {
 }
 
 inline tflite::RuntimeShape convertShapeToTflshape(const Shape& shape) {
-  nnAssert(shape.dimensions.size() <= 4);
+  // nnAssert(shape.dimensions.size() <= 4);
 
   std::vector<int32_t> tflShapeDim(shape.dimensions.begin(), shape.dimensions.end());
   return tflite::RuntimeShape(tflShapeDim.size(), tflShapeDim.data());

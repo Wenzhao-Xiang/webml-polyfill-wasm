@@ -44,7 +44,9 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#ifndef EMSCRIPTEN
 #include <sys/cdefs.h>
+#endif
 
 __BEGIN_DECLS
 

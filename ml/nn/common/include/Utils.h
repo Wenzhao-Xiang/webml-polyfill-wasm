@@ -17,11 +17,74 @@
 #ifndef ANDROID_ML_NN_COMMON_UTILS_H
 #define ANDROID_ML_NN_COMMON_UTILS_H
 
-#include "HalInterfaces.h"
-#include "NeuralNetworks.h"
-#include "ValidateHal.h"
+#ifdef EMSCRIPTEN
+#define __wur
+#include <stdint.h>
+#include "tensorflow/core/platform/default/logging.h"
+enum class FusedActivationFunc : int32_t {
+    NONE = 0,
+    RELU = 1,
+    RELU1 = 2,
+    RELU6 = 3,
+};
+enum class OperandType : int32_t {
+    FLOAT32 = 0,
+    INT32 = 1,
+    UINT32 = 2,
+    TENSOR_FLOAT32 = 3,
+    TENSOR_INT32 = 4,
+    TENSOR_QUANT8_ASYMM = 5,
+    OEM = 10000,
+    TENSOR_OEM_BYTE = 10001,
+};
+enum class OperationType : int32_t {
+    ADD = 0,
+    AVERAGE_POOL_2D = 1,
+    CONCATENATION = 2,
+    CONV_2D = 3,
+    DEPTHWISE_CONV_2D = 4,
+    DEPTH_TO_SPACE = 5,
+    DEQUANTIZE = 6,
+    EMBEDDING_LOOKUP = 7,
+    FLOOR = 8,
+    FULLY_CONNECTED = 9,
+    HASHTABLE_LOOKUP = 10,
+    L2_NORMALIZATION = 11,
+    L2_POOL_2D = 12,
+    LOCAL_RESPONSE_NORMALIZATION = 13,
+    LOGISTIC = 14,
+    LSH_PROJECTION = 15,
+    LSTM = 16,
+    MAX_POOL_2D = 17,
+    MUL = 18,
+    RELU = 19,
+    RELU1 = 20,
+    RELU6 = 21,
+    RESHAPE = 22,
+    RESIZE_BILINEAR = 23,
+    RNN = 24,
+    SOFTMAX = 25,
+    SPACE_TO_DEPTH = 26,
+    SVDF = 27,
+    TANH = 28,
+    OEM_OPERATION = 10000,
+};
+#define ERROR 1
+#include <iostream>
+#define LOG(x) std::cout
+#endif
 
+#ifndef EMSCRIPTEN
+#include "HalInterfaces.h"
+//#endif
+#include "NeuralNetworks.h"
+//#ifndef EMSCRIPTEN
+#include "ValidateHal.h"
+#endif
+
+#ifndef EMSCRIPTEN
 #include <android-base/logging.h>
+#endif
 #include <vector>
 
 namespace android {
@@ -83,22 +146,25 @@ void initVLogMask();
 // dimensions and type.
 uint32_t sizeOfData(OperandType type, const std::vector<uint32_t>& dimensions);
 
+#ifndef EMSCRIPTEN
 // Returns the amount of space needed to store a value of the dimensions and
 // type of this operand.
 inline uint32_t sizeOfData(const Operand& operand) {
     return sizeOfData(operand.type, operand.dimensions);
 }
-
+#endif
 // Returns the name of the operation type in ASCII.
 const char* getOperationName(OperationType opCode);
 
 // Returns the name of the operand type in ASCII.
 const char* getOperandTypeName(OperandType type);
 
+#ifndef EMSCRIPTEN
 // Memory is unmapped.
 // Memory is reference counted by hidl_memory instances, and is deallocated
 // once there are no more references.
 hidl_memory allocateSharedMemory(int64_t size);
+#endif
 
 // Returns the number of padding bytes needed to align data of the
 // specified length.  It aligns object of length:
@@ -109,10 +175,12 @@ hidl_memory allocateSharedMemory(int64_t size);
 // to determine what this should be.
 uint32_t alignBytesNeeded(uint32_t index, size_t length);
 
+#ifndef EMSCRIPTEN
 // Does a detailed LOG(INFO) of the model
 void logModelToInfo(const V1_0::Model& model);
 void logModelToInfo(const V1_1::Model& model);
 void logModelToInfo(const V1_2::Model& model);
+#endif
 
 inline std::string toString(uint32_t obj) {
     return std::to_string(obj);
@@ -130,10 +198,13 @@ std::string toString(const std::vector<Type>& range) {
 inline bool validCode(uint32_t codeCount, uint32_t codeCountOEM, uint32_t code) {
     return (code < codeCount) || (code >= kOEMCodeBase && (code - kOEMCodeBase) < codeCountOEM);
 }
-
+#ifndef EMSCRIPTEN
 int validateOperandType(const ANeuralNetworksOperandType& type, const char* tag, bool allowPartial);
+#endif
 int validateOperandList(uint32_t count, const uint32_t* list, uint32_t operandCount,
                         const char* tag);
+
+#ifndef EMSCRIPTEN
 // Typename substitutes are contained in the cpp file.
 int validateOperation(ANeuralNetworksOperationType opType, uint32_t inputCount,
                       const uint32_t* inputIndexes, uint32_t outputCount,
@@ -147,11 +218,12 @@ inline int validateOperation(ANeuralNetworksOperationType opType, uint32_t input
     return validateOperation(opType, inputCount, inputIndexes, outputCount, outputIndexes, operands,
                              &minSupportedHalVersion);
 }
-
+#endif
 inline size_t getSizeFromInts(int lower, int higher) {
     return (uint32_t)(lower) + ((uint64_t)(uint32_t)(higher) << 32);
 }
 
+#ifndef EMSCRIPTEN
 // Convert ANEURALNETWORKS_* result code to ErrorStatus.
 // Not guaranteed to be a 1-to-1 mapping.
 ErrorStatus convertResultCodeToErrorStatus(int resultCode);
@@ -193,6 +265,7 @@ V1_2::Operand convertToV1_2(const V1_2::Operand& operand);
 
 hidl_vec<V1_2::Operand> convertToV1_2(const hidl_vec<V1_0::Operand>& operands);
 hidl_vec<V1_2::Operand> convertToV1_2(const hidl_vec<V1_2::Operand>& operands);
+#endif
 
 #ifdef NN_DEBUGGABLE
 uint32_t getProp(const char* str, uint32_t defaultValue = 0);
