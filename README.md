@@ -1,4 +1,4 @@
-# webml-wasm
+# webml-polyfill-wasm
 Fork of https://android.googlesource.com/platform/frameworks/ml and https://github.com/tensorflow/tensorflow
 
 # Build
@@ -12,12 +12,12 @@ Fork of https://android.googlesource.com/platform/frameworks/ml and https://gith
 ## Steps
 ### Clone the source code
 ```
-$ git clone https://github.com/Wenzhao-Xiang/webml-wasm.git
+$ git clone https://github.com/Wenzhao-Xiang/webml-polyfill-wasm.git
 ```
 
 ### Create a new directory `./build`
 ```
-$ cd webml-wasm/ml/nn
+$ cd webml-polyfill-wasm/ml/nn
 $ mkdir build
 $ cd build
 ```
