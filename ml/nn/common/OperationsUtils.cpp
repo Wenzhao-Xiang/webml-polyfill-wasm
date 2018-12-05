@@ -16,15 +16,14 @@
 
 #define LOG_TAG "OperationsUtils"
 
+#include "ActivationFunctor.h"
 #include "OperationsUtils.h"
 #include "Operations.h"
 #include "Utils.h"
 
 #include <cmath>
 
-namespace android {
 namespace nn {
-
 bool SameShape(const Shape& in1, const Shape& in2) {
     if (in1.type != in2.type || in1.dimensions.size() != in2.dimensions.size()) {
         return false;
@@ -1185,5 +1184,4 @@ bool rotatedBBoxTransformPrepare(const float* roiData, const Shape& roiShape,
                                 angleBoundOn, angleBoundLow, angleBoundHigh, outputShape,
                                 batchSplitShape);
 }
-} // namespace nn
-} // namespace android
+} // nn

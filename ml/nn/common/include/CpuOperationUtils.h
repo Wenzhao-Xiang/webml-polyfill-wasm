@@ -21,7 +21,6 @@
 
 #include "tensorflow/contrib/lite/kernels/internal/types.h"
 
-namespace android {
 namespace nn {
 
 // The implementations in tflite/kernels/internal/ take a Dims<4> object
@@ -54,6 +53,5 @@ inline tflite::RuntimeShape convertShapeToTflshape(const Shape& shape) {
   return tflite::RuntimeShape(tflShapeDim.size(), tflShapeDim.data());
 }
 } // nn
-} // android
 
 #endif // ANDROID_ML_NN_COMMON_CPU_OPERATION_UTILS_H

@@ -20,11 +20,7 @@
 #include "tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
 #include "tensorflow/contrib/lite/kernels/internal/reference/reference_ops.h"
 
-#include "Tracing.h"
-
-namespace android {
 namespace nn {
-
 bool fullyConnectedFloat32(const float* inputData, const Shape& inputShape,
                            const float* weightsData, const Shape& weightsShape,
                            const float* biasData, const Shape& biasShape,
@@ -58,47 +54,4 @@ bool fullyConnectedFloat32(const float* inputData, const Shape& inputShape,
     }
     return true;
 }
-
-bool fullyConnectedQuant8(const uint8_t* inputData, const Shape& inputShape,
-                          const uint8_t* weightsData, const Shape& weightsShape,
-                          const int32_t* biasData, const Shape& biasShape,
-                          int32_t activation,
-                          uint8_t* outputData, const Shape& outputShape) {
-    // NNTRACE_TRANS("fullyConnectedQuant8");
-    int32_t inputOffset = -inputShape.offset;
-    int32_t weightsOffset = -weightsShape.offset;
-    int32_t outputOffset = outputShape.offset;
-
-    float real_multiplier = 0.0;
-    int32_t output_multiplier = 0;
-    int32_t output_shift = 0;
-    int32_t output_activation_min = 0;
-    int32_t output_activation_max = 0;
-
-    if (!GetQuantizedConvolutionMultipler(inputShape, weightsShape, biasShape,
-                                          outputShape, &real_multiplier) ||
-            !QuantizeMultiplierSmallerThanOne(real_multiplier, &output_multiplier,
-                                              &output_shift)) {
-        return false;
-    }
-    CalculateActivationRangeUint8(activation, outputShape,
-                                  &output_activation_min,
-                                  &output_activation_max);
-
-    static thread_local gemmlowp::GemmContext gemm_context;
-    // Alow gemmlowp automatically decide how many threads to use.
-    gemm_context.set_max_num_threads(0);
-
-    // NNTRACE_COMP_SWITCH("optimized_ops::FullyConnected");
-    tflite::optimized_ops::FullyConnected(
-            inputData, convertShapeToDims(inputShape), inputOffset,
-            weightsData, convertShapeToDims(weightsShape), weightsOffset,
-            biasData, convertShapeToDims(biasShape),
-            outputOffset, output_multiplier, output_shift,
-            output_activation_min, output_activation_max,
-            outputData, convertShapeToDims(outputShape), &gemm_context);
-
-    return true;
-}
-}  // namespace nn
-}  // namespace android
+} // nn

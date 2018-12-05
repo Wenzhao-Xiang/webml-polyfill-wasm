@@ -36,10 +36,7 @@
 
 // DEPRECATED. Use NN_CHECK instead.
 #define NN_OPS_CHECK NN_CHECK
-
-namespace android {
 namespace nn {
-
 enum PaddingScheme {
     kPaddingUnknown = 0,
     kPaddingSame = 1,
@@ -336,7 +333,5 @@ bool rotatedBBoxTransformPrepare(const float* roiData, const Shape& roiShape,
                                  const Shape& weightsShape, bool angleBoundOn,
                                  int32_t angleBoundLow, int32_t angleBoundHigh, Shape* outputShape,
                                  Shape* batchSplitShape);
-} // namespace nn
-} // namespace android
-
+} // nn
 #endif // ANDROID_ML_NN_COMMON_OPERATIONS_UTILS_H

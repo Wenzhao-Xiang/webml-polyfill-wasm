@@ -17,30 +17,28 @@
 #ifndef ANDROID_ML_NN_COMMON_OPERATIONS_H
 #define ANDROID_ML_NN_COMMON_OPERATIONS_H
 
-#include "operations/Cast.h"
-#include "operations/EmbeddingLookup.h"
-#include "operations/ExpandDims.h"
-#include "operations/Gather.h"
-#include "operations/HashtableLookup.h"
-#include "operations/LSHProjection.h"
-#include "operations/LSTM.h"
-#include "operations/MaximumMinimum.h"
-#include "operations/Multinomial.h"
-#include "operations/Pow.h"
-#include "operations/QuantizedLSTM.h"
-#include "operations/RNN.h"
-#include "operations/SVDF.h"
-#include "operations/Tile.h"
-#include "operations/TopK_V2.h"
+// #include "operations/Cast.h"
+// #include "operations/EmbeddingLookup.h"
+// #include "operations/ExpandDims.h"
+// #include "operations/Gather.h"
+// #include "operations/HashtableLookup.h"
+// #include "operations/LSHProjection.h"
+// #include "operations/LSTM.h"
+// #include "operations/MaximumMinimum.h"
+// #include "operations/Multinomial.h"
+// #include "operations/Pow.h"
+// #include "operations/QuantizedLSTM.h"
+// #include "operations/RNN.h"
+// #include "operations/SVDF.h"
+// #include "operations/Tile.h"
+// #include "operations/TopK_V2.h"
 
 #include <stddef.h>
 
 #include <cstdint>
 #include <vector>
 
-namespace android {
 namespace nn {
-
 struct Shape;
 
 bool addFloat32(const float* in1, const Shape& shape1, const float* in2, const Shape& shape2,
@@ -277,6 +275,6 @@ bool rotatedBBoxTransform(const float* roiData, const Shape& roiShape, const flo
                           int32_t angleBoundLow, int32_t angleBoundHigh, float clipAngleThreshold,
                           float* outputData, const Shape& outputShape, int32_t* batchSplitData,
                           const Shape& batchSplitShape);
-}  // namespace nn
-}  // namespace android
+
+} // nn
 #endif  // ANDROID_ML_NN_COMMON_OPERATIONS_H

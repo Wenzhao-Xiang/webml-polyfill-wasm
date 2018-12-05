@@ -4,7 +4,7 @@
 #include "OperationsUtils.h"
 
 using namespace emscripten;
-using namespace android::nn;
+using namespace nn;
 
 namespace binding_utils {
   int32_t getShapeType(const Shape& shape) {

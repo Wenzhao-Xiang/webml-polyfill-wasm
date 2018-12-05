@@ -19,11 +19,7 @@
 
 #include "tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
 
-#include "Tracing.h"
-
-namespace android {
 namespace nn {
-
 #define ANDROID_NN_POOLING_PARAMETERS                                      \
     tflite::PoolParams op_params;                                          \
     op_params.stride_height = stride_height;                               \
@@ -172,5 +168,4 @@ bool maxPoolQuant8(const uint8_t* inputData, const Shape& inputShape,
 }
 
 #undef ANDROID_NN_POOLING_PARAMETERS
-}  // namespace nn
-}  // namespace android
+} // nn

@@ -29,7 +29,7 @@
 
 // using ::android::hidl::allocator::V1_0::IAllocator;
 
-namespace android {
+
 namespace nn {
 
 // const char kVLogPropKey[] = "debug.nn.vlog";
@@ -2614,4 +2614,3 @@ uint32_t alignBytesNeeded(uint32_t index, size_t length) {
 // #endif  // NN_DEBUGGABLE
 
 } // namespace nn
-} // namespace android

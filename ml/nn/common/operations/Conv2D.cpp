@@ -19,11 +19,7 @@
 
 #include "tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
 
-#include "Tracing.h"
-
-namespace android {
 namespace nn {
-
 // If possible we will use this static buffer for the tensor.
 static constexpr size_t kStaticBufferSize = 1605632;
 static char static_scratch_buffer[kStaticBufferSize];
@@ -105,55 +101,5 @@ bool convFloat32(const float* inputData, const Shape& inputShape,
     return true;
 }
 
-bool convQuant8(const uint8_t* inputData, const Shape& inputShape,
-                const uint8_t* filterData, const Shape& filterShape,
-                const int32_t* biasData, const Shape& biasShape,
-                int32_t padding_left, int32_t padding_right,
-                int32_t padding_top, int32_t padding_bottom,
-                int32_t stride_width, int32_t stride_height,
-                int32_t activation,
-                uint8_t* outputData, const Shape& outputShape) {
-    // NNTRACE_TRANS("convQuant8");
-
-    ANDROID_NN_CONV_PARAMETERS(uint8_t)
-
-    int32_t inputOffset = -inputShape.offset;
-    int32_t filterOffset = -filterShape.offset;
-    int32_t outputOffset = outputShape.offset;
-
-    float real_multiplier = 0.0;
-    int32_t output_multiplier = 0;
-    int32_t output_shift = 0;
-    int32_t output_activation_min = 0;
-    int32_t output_activation_max = 0;
-
-    if (!GetQuantizedConvolutionMultipler(inputShape, filterShape, biasShape,
-                                          outputShape, &real_multiplier) ||
-            !QuantizeMultiplierSmallerThanOne(real_multiplier, &output_multiplier,
-                                              &output_shift)){
-        return false;
-    }
-    CalculateActivationRangeUint8(activation, outputShape,
-                                  &output_activation_min,
-                                  &output_activation_max);
-
-    static thread_local gemmlowp::GemmContext gemm_context;
-    // Alow gemmlowp automatically decide how many threads to use.
-    gemm_context.set_max_num_threads(0);
-
-    // NNTRACE_COMP_SWITCH("optimized_ops::Conv");
-    tflite::optimized_ops::Conv(
-            inputData, convertShapeToDims(inputShape), inputOffset,
-            filterData, convertShapeToDims(filterShape), filterOffset,
-            biasData, convertShapeToDims(biasShape),
-            stride_width, stride_height, paddingWidth, paddingHeight,
-            outputOffset, output_multiplier, output_shift,
-            output_activation_min, output_activation_max,
-            outputData, convertShapeToDims(outputShape),
-            im2colData, im2colDim, &gemm_context);
-    return true;
-}
-
 #undef ANDROID_NN_CONV_PARAMETERS
-}  // namespace nn
-}  // namespace android
+} // nn

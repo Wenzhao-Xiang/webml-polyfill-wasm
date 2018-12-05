@@ -24,11 +24,7 @@
 #include "tensorflow/contrib/lite/kernels/internal/optimized/legacy_optimized_ops.h"
 #include "tensorflow/contrib/lite/kernels/internal/reference/reference_ops.h"
 
-#include "Tracing.h"
-
-namespace android {
 namespace nn {
-
 bool reshapeGeneric(const void* inputData, const Shape& inputShape,
                     void* outputData, const Shape& outputShape) {
     // NNTRACE_COMP("reshapeGeneric");
@@ -118,8 +114,8 @@ static bool padGeneric(const T* inputData, const Shape& inputShape, const int32_
     // Based on
     // http://google3/third_party/tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h?l=6194&rcl=213557260
 
-    // TFLite runtime calls are currently fixed at 4 dimensions. Copy inputs so
-    // we can pad them to 4 dims (yes, we are "padding the padding").
+    // // TFLite runtime calls are currently fixed at 4 dimensions. Copy inputs so
+    // // we can pad them to 4 dims (yes, we are "padding the padding").
     // int32_t numInputDims = static_cast<int32_t>(getNumberOfDimensions(inputShape));
     // NN_OPS_CHECK(numInputDims <= 4);
     // std::vector<int> leftPaddings(4 - numInputDims, 0);
@@ -332,5 +328,4 @@ bool transposeGeneric(const uint8_t* inputData, const Shape& inputShape,
     }
     return true;
 }
-} // namespace nn
-} // namespace android
+} // nn
