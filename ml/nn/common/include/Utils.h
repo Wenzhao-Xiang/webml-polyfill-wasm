@@ -19,7 +19,7 @@
 
 #define __wur
 #include <stdint.h>
-#include "tensorflow/core/platform/default/logging.h"
+
 enum class FusedActivationFunc : int32_t {
     NONE = 0,
     RELU = 1,
@@ -120,6 +120,9 @@ extern int vLogMask;
 void initVLogMask();
 
 // DEPRECATED(b/118737105). Use CHECK.
+#define CHECK(condition)              \
+  if (!(condition)) \
+  LOG(FATAL) << "Check failed: " #condition " "
 #define nnAssert(v) CHECK(v)
 
 // Returns the amount of space needed to store a value of the specified
