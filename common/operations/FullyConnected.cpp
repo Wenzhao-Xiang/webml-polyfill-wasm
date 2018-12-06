@@ -17,8 +17,8 @@
 #include "Operations.h"
 #include "CpuOperationUtils.h"
 
-#include "tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
-#include "tensorflow/contrib/lite/kernels/internal/reference/reference_ops.h"
+#include "external/tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
+#include "external/tensorflow/contrib/lite/kernels/internal/reference/reference_ops.h"
 
 namespace nn {
 bool fullyConnectedFloat32(const float* inputData, const Shape& inputShape,

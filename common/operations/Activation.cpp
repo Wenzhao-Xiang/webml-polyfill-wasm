@@ -18,8 +18,8 @@
 #include "CpuOperationUtils.h"
 #include "float.h"
 
-#include "tensorflow/contrib/lite/kernels/internal/optimized/legacy_optimized_ops.h"
-#include "tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
+#include "external/tensorflow/contrib/lite/kernels/internal/optimized/legacy_optimized_ops.h"
+#include "external/tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
 
 // #include "Tracing.h"
 namespace nn {

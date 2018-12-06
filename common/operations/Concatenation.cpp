@@ -17,7 +17,7 @@
 #include "Operations.h"
 #include "CpuOperationUtils.h"
 
-#include "tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
+#include "external/tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
 
 namespace nn {
 bool concatenationFloat32(const std::vector<const float*>& inputDataPtrs,

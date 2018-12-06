@@ -19,7 +19,7 @@
 
 #include "OperationsUtils.h"
 
-#include "tensorflow/contrib/lite/kernels/internal/types.h"
+#include "external/tensorflow/contrib/lite/kernels/internal/types.h"
 
 namespace nn {
 

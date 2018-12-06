@@ -5,16 +5,14 @@ set(CMAKE_BUILD_TYPE Release)
 include_directories(
   common/include
   common/
-  runtime/
-  runtime/include
-  ../../
-  ../../eigen
-  ../../gemmlowp/fixedpoint
-  ../../gemmlowp/public
-  ../../tensorflow/contrib/lite/kernels/
-  ../../tensorflow/
+  ./
+  external/
+  external/eigen
+  external/gemmlowp/fixedpoint
+  external/gemmlowp/public
+  external/tensorflow/contrib/lite/kernels/
   )
- 
+
 set(SOURCES
     bind/src/binding.cpp
     common/operations/Activation.cpp

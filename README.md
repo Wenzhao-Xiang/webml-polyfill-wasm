@@ -17,7 +17,7 @@ $ git clone https://github.com/Wenzhao-Xiang/webml-polyfill-wasm.git
 
 ### Create a new directory `./build`
 ```
-$ cd webml-polyfill-wasm/ml/nn
+$ cd webml-polyfill-wasm/
 $ mkdir build
 $ cd build
 ```

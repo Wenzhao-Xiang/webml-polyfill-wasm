@@ -21,8 +21,8 @@
 #include "Operations.h"
 #include "CpuOperationUtils.h"
 
-#include "tensorflow/contrib/lite/kernels/internal/optimized/legacy_optimized_ops.h"
-#include "tensorflow/contrib/lite/kernels/internal/reference/legacy_reference_ops.h"
+#include "external/tensorflow/contrib/lite/kernels/internal/optimized/legacy_optimized_ops.h"
+#include "external/tensorflow/contrib/lite/kernels/internal/reference/legacy_reference_ops.h"
 
 namespace nn {
 inline void get4DShape(const Shape& shapeIn, uint32_t* shapeOut) {
