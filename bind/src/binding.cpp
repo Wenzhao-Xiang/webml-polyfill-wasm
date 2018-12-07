@@ -87,6 +87,18 @@ namespace binding_utils {
                                     Shape& output) {
     return resizeBilinearPrepare(input, height, width, &output);
   }
+  bool padPrepareWrapper(const Shape& input,
+                         const intptr_t paddingsData,
+                         const Shape& paddingsShape,
+                         Shape& output) {
+    return padPrepare(input, (const int32_t*)paddingsData, paddingsShape, &output);
+  }
+  bool transposePrepareWrapper(const Shape& input,
+                         const intptr_t permData,
+                         const Shape& permShape,
+                         Shape& output) {
+    return transposePrepare(input, (const int32_t*)permData, permShape, &output);
+  }
 
   // Operation wrappers.
   bool addFloat32Wrapper(const intptr_t in1, const Shape& shape1,
@@ -205,6 +217,19 @@ namespace binding_utils {
                                  (float*) outputData, outputShape);
   }
 
+  bool padFloat32Wrapper(const intptr_t inputData, const Shape& inputShape, const intptr_t paddings,
+                float padValue, intptr_t outputData, const Shape& outputShape) {
+    return padFloat32((const float*) inputData, inputShape, (const int32_t*)paddings,
+                      padValue, (float*)outputData, outputShape);
+  }
+
+  bool transposeFloat32Wrapper(const intptr_t inputData, const Shape& inputShape,
+                      const intptr_t perm, const Shape& permShape,
+                      intptr_t outputData, const Shape& outputShape) {
+    return transposeGeneric((const float*) inputData, inputShape, 
+    (const int32_t*)perm, permShape, (float*)outputData, outputShape);
+  }
+
 }
 
 EMSCRIPTEN_BINDINGS(nn)
@@ -244,6 +269,8 @@ EMSCRIPTEN_BINDINGS(nn)
   function("concatenationPrepare", &binding_utils::concatenationPrepareWrapper);
   function("fullyConnectedPrepare", &binding_utils::fullyConnectedPrepareWrapper);
   function("resizeBilinearPrepare", &binding_utils::resizeBilinearPrepareWrapper);
+  function("padPrepare", &binding_utils::padPrepareWrapper);
+  function("tranposePrepare", &binding_utils::transposePrepareWrapper);
 
   // Operations.
   function("addFloat32", &binding_utils::addFloat32Wrapper, allow_raw_pointers());
@@ -258,6 +285,8 @@ EMSCRIPTEN_BINDINGS(nn)
   function("concatenationFloat32", &binding_utils::concatenationFloat32Wrapper, allow_raw_pointers());
   function("fullyConnectedFloat32", &binding_utils::fullyConnectedFloat32Wrapper, allow_raw_pointers());
   function("resizeBilinearFloat32", &binding_utils::resizeBilinearFloat32Wrapper, allow_raw_pointers());
+  function("padFloat32", &binding_utils::padFloat32Wrapper, allow_raw_pointers());
+  function("transposeFloat32", &binding_utils::transposeFloat32Wrapper, allow_raw_pointers());
 
   // TODO: operation wrappers
   /*

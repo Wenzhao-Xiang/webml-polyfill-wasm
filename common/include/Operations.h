@@ -190,8 +190,8 @@ bool squeezeGeneric(const void* inputData, const Shape& inputShape, void* output
 bool divFloat32(const float* in1, const Shape& shape1, const float* in2, const Shape& shape2,
                 int32_t activation, float* out, const Shape& shapeOut);
 
-bool transposeGeneric(const uint8_t* inputData, const Shape& inputShape, const int32_t* perm,
-                      const Shape& permShape, uint8_t* outputData, const Shape& outputShape);
+bool transposeGeneric(const float* inputData, const Shape& inputShape, const int32_t* perm,
+                      const Shape& permShape, float* outputData, const Shape& outputShape);
 
 bool meanGeneric(const uint8_t* inputData, const Shape& inputShape, const int32_t* axis,
                  const Shape& axisShape, bool keepDims, uint8_t* outputData,
