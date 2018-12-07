@@ -17,8 +17,8 @@ limitations under the License.
 
 #include <algorithm>
 
-#include "gemmlowp/fixedpoint/fixedpoint.h"
-#include "gemmlowp/public/gemmlowp.h"
+#include "external/gemmlowp/fixedpoint/fixedpoint.h"
+#include "external/gemmlowp/public/gemmlowp.h"
 #include "tensorflow/contrib/lite/kernels/internal/common.h"
 #include "tensorflow/contrib/lite/kernels/internal/compatibility.h"
 #include "tensorflow/contrib/lite/kernels/internal/types.h"

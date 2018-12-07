@@ -15,7 +15,7 @@ limitations under the License.
 #ifndef TENSORFLOW_CONTRIB_LITE_KERNELS_INTERNAL_OPTIMIZED_DEPTHWISECONV_FLOAT_H_
 #define TENSORFLOW_CONTRIB_LITE_KERNELS_INTERNAL_OPTIMIZED_DEPTHWISECONV_FLOAT_H_
 
-#include "gemmlowp/public/gemmlowp.h"
+#include "external/gemmlowp/public/gemmlowp.h"
 #include "tensorflow/contrib/lite/kernels/internal/common.h"
 #include "tensorflow/contrib/lite/kernels/internal/types.h"
 

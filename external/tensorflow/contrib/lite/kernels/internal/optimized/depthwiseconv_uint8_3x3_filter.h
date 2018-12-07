@@ -15,8 +15,8 @@ limitations under the License.
 #ifndef TENSORFLOW_CONTRIB_LITE_KERNELS_INTERNAL_OPTIMIZED_DEPTHWISECONV_UINT8_3X3_FILTER_H_
 #define TENSORFLOW_CONTRIB_LITE_KERNELS_INTERNAL_OPTIMIZED_DEPTHWISECONV_UINT8_3X3_FILTER_H_
 
-#include "gemmlowp/fixedpoint/fixedpoint.h"
-#include "gemmlowp/public/gemmlowp.h"
+#include "external/gemmlowp/fixedpoint/fixedpoint.h"
+#include "external/gemmlowp/public/gemmlowp.h"
 #include "tensorflow/contrib/lite/kernels/internal/common.h"
 #include "tensorflow/contrib/lite/kernels/internal/types.h"
 
