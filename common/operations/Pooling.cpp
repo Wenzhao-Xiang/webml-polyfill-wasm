@@ -17,7 +17,7 @@
 #include "Operations.h"
 #include "CpuOperationUtils.h"
 
-#include "external/tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
+#include "external/tensorflow/tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
 
 namespace nn {
 #define ANDROID_NN_POOLING_PARAMETERS                                      \

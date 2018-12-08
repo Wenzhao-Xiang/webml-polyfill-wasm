@@ -21,8 +21,8 @@
 #include "Operations.h"
 #include "CpuOperationUtils.h"
 
-#include "external/tensorflow/contrib/lite/kernels/internal/optimized/legacy_optimized_ops.h"
-#include "external/tensorflow/contrib/lite/kernels/internal/reference/reference_ops.h"
+#include "external/tensorflow/tensorflow/contrib/lite/kernels/internal/optimized/legacy_optimized_ops.h"
+#include "external/tensorflow/tensorflow/contrib/lite/kernels/internal/reference/reference_ops.h"
 
 namespace nn {
 bool reshapeGeneric(const void* inputData, const Shape& inputShape,

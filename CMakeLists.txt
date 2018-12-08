@@ -7,10 +7,11 @@ include_directories(
   common/
   ./
   external/
-  external/eigen
-  external/gemmlowp/fixedpoint
-  external/gemmlowp/public
-  external/tensorflow/contrib/lite/kernels/
+  external/tensorflow/
+  external/tensorflow/tensorflow/contrib/makefile/downloads/eigen/
+  external/tensorflow/tensorflow/contrib/makefile/downloads/gemmlowp/
+  external/tensorflow/tensorflow/contrib/lite/kernels/
+  external/tensorflow/third_party/
   )
 
 set(SOURCES

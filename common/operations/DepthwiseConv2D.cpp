@@ -17,8 +17,8 @@
 #include "Operations.h"
 #include "CpuOperationUtils.h"
 
-#include "external/tensorflow/contrib/lite/kernels/internal/optimized/depthwiseconv_float.h"
-#include "external/tensorflow/contrib/lite/kernels/internal/optimized/depthwiseconv_uint8.h"
+#include "external/tensorflow/tensorflow/contrib/lite/kernels/internal/optimized/depthwiseconv_float.h"
+#include "external/tensorflow/tensorflow/contrib/lite/kernels/internal/optimized/depthwiseconv_uint8.h"
 
 namespace nn {
 #define ANDROID_NN_DEPTHWISE_CONV_PARAMETERS                                    \
