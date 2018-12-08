@@ -1,5 +1,5 @@
 # webml-polyfill-wasm
-Fork of https://android.googlesource.com/platform/frameworks/ml and https://github.com/tensorflow/tensorflow
+Fork of https://android.googlesource.com/platform/frameworks/ml
 
 # Build
 
@@ -15,9 +15,21 @@ Fork of https://android.googlesource.com/platform/frameworks/ml and https://gith
 $ git clone https://github.com/Wenzhao-Xiang/webml-polyfill-wasm.git
 ```
 
-### Create a new directory `./build`
+### Initialize and update the submodule
 ```
 $ cd webml-polyfill-wasm/
+$ git submodule update --init --recursive
+```
+
+### Download tensorflow dependencies
+```
+$ cd external/tensorflow/
+$ ./tensorflow/contrib/makefile/download_dependencies.sh
+```
+
+### Create a new directory `./build`
+```
+$ cd ../../
 $ mkdir build
 $ cd build
 ```
