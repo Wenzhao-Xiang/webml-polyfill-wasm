@@ -75,6 +75,7 @@ bool convFloat32(const float* inputData, const Shape& inputShape,
                  int32_t padding_left, int32_t padding_right,
                  int32_t padding_top, int32_t padding_bottom,
                  int32_t stride_width, int32_t stride_height,
+                 int32_t dilationWidthFactor, int32_t dilationHeightFactor,
                  int32_t activation,
                  float* outputData, const Shape& outputShape) {
     // NNTRACE_TRANS("convFloat32");
@@ -84,8 +85,6 @@ bool convFloat32(const float* inputData, const Shape& inputShape,
     float output_activation_min, output_activation_max;
     CalculateActivationRangeFloat(activation, &output_activation_min,
                                   &output_activation_max);
-
-    int32_t dilationWidthFactor = 1, dilationHeightFactor = 1;
 
     // NNTRACE_COMP_SWITCH("optimized_ops::Conv");
     tflite::optimized_ops::Conv(

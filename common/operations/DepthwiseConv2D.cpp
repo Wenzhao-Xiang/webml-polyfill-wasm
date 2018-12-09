@@ -39,6 +39,7 @@ bool depthwiseConvFloat32(const float* inputData, const Shape& inputShape,
                           int32_t padding_left, int32_t padding_right,
                           int32_t padding_top, int32_t padding_bottom,
                           int32_t stride_width, int32_t stride_height,
+                          int32_t dilationWidthFactor, int32_t dilationHeightFactor,
                           int32_t depth_multiplier, int32_t activation,
                           float* outputData, const Shape& outputShape) {
     // NNTRACE_TRANS("depthwiseConvFloat32");
@@ -55,6 +56,7 @@ bool depthwiseConvFloat32(const float* inputData, const Shape& inputShape,
             filterData, convertShapeToDims(filterShape),
             biasData, convertShapeToDims(biasShape),
             stride_width, stride_height,
+            dilationWidthFactor, dilationHeightFactor,
             paddingWidth, paddingHeight, depth_multiplier,
             output_activation_min, output_activation_max,
             outputData, convertShapeToDims(outputShape));

@@ -111,6 +111,7 @@ namespace binding_utils {
                                    int32_t padding_left, int32_t padding_right,
                                    int32_t padding_top, int32_t padding_bottom,
                                    int32_t stride_width, int32_t stride_height,
+                                   int32_t dilationWidthFactor, int32_t dilationHeightFactor,
                                    int32_t depth_multiplier, int32_t activation,
                                    intptr_t outputData, const Shape& outputShape) {
     return depthwiseConvFloat32((const float*)inputData, inputShape,
@@ -118,6 +119,7 @@ namespace binding_utils {
                                 (const float*)biasData, biasShape,
                                 padding_left, padding_right, padding_top, padding_bottom,
                                 stride_width, stride_height,
+                                dilationWidthFactor, dilationHeightFactor,
                                 depth_multiplier, activation,
                                 (float*)outputData, outputShape);
   }
@@ -128,13 +130,15 @@ namespace binding_utils {
                           int32_t padding_left, int32_t padding_right,
                           int32_t padding_top, int32_t padding_bottom,
                           int32_t stride_width, int32_t stride_height,
+                          int32_t dilationWidthFactor, int32_t dilationHeightFactor,
                           int32_t activation,
                           intptr_t outputData, const Shape& outputShape) {
     return convFloat32((const float*)inputData, inputShape,
                        (const float*)filterData, filterShape,
                        (const float*)biasData, biasShape,
                        padding_left, padding_right, padding_top, padding_bottom,
-                       stride_width,  stride_height, activation,
+                       stride_width, stride_height, 
+                       dilationWidthFactor, dilationHeightFactor, activation,
                        (float*)outputData, outputShape);
   }
 
