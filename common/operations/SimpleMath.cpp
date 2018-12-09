@@ -21,8 +21,8 @@
 #include "Operations.h"
 #include "CpuOperationUtils.h"
 
-#include "external/tensorflow/tensorflow/contrib/lite/kernels/internal/optimized/legacy_optimized_ops.h"
-#include "external/tensorflow/tensorflow/contrib/lite/kernels/internal/reference/legacy_reference_ops.h"
+#include "external/tensorflow/tensorflow/lite/kernels/internal/optimized/legacy_optimized_ops.h"
+#include "external/tensorflow/tensorflow/lite/kernels/internal/reference/legacy_reference_ops.h"
 
 namespace nn {
 inline void get4DShape(const Shape& shapeIn, uint32_t* shapeOut) {
@@ -103,6 +103,9 @@ bool addFloat32(const float* in1, const Shape& shape1,
                 float* out, const Shape& shapeOut) {
     // NNTRACE_TRANS("addFloat32");
     bool needBroadcast = !SameShape(shape1, shape2);
+    float output_activation_min, output_activation_max;
+    CalculateActivationRangeFloat(activation, &output_activation_min,
+                                  &output_activation_max);
 
     if (needBroadcast) {
         // NNTRACE_COMP_SWITCH("optimized_ops::BroadcastAdd");

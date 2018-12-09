@@ -19,7 +19,7 @@
 
 #include <algorithm>
 #include <cmath>
-#include "external/tensorflow/tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
+#include "external/tensorflow/tensorflow/lite/kernels/internal/optimized/optimized_ops.h"
 
 namespace nn {
 

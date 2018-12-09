@@ -18,8 +18,8 @@
 #include "CpuOperationUtils.h"
 #include "float.h"
 
-#include "external/tensorflow/tensorflow/contrib/lite/kernels/internal/optimized/legacy_optimized_ops.h"
-#include "external/tensorflow/tensorflow/contrib/lite/kernels/internal/optimized/optimized_ops.h"
+#include "external/tensorflow/tensorflow/lite/kernels/internal/optimized/legacy_optimized_ops.h"
+#include "external/tensorflow/tensorflow/lite/kernels/internal/optimized/optimized_ops.h"
 
 // #include "Tracing.h"
 namespace nn {
@@ -113,9 +113,9 @@ bool softmaxFloat32(const float* inputData, const Shape& inputShape, const float
     // TFLite optimized implementation only supports computation along the last axis
     if (axis == ndim - 1) {
         // NNTRACE_COMP("optimized_ops::Softmax::float");
-        // tflite::SoftmaxParams param = {.beta = beta};
-        tflite::optimized_ops::Softmax(inputData, convertShapeToTflshape(inputShape), beta,
-                                       outputData, convertShapeToTflshape(outputShape));
+        tflite::SoftmaxParams param = {.beta = beta};
+        tflite::optimized_ops::Softmax(param, convertShapeToTflshape(inputShape), inputData,
+                                       convertShapeToTflshape(outputShape), outputData);
         return true;
     } else {
         return softmaxFloat32Impl(inputData, inputShape, beta, axis, outputData, outputShape);
